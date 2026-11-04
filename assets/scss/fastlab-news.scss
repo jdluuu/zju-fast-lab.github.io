@@ -1,0 +1,45 @@
+.fastlab-news-page {
+  .page-body { flex-grow: 1; }
+  .fastlab-header-inner { max-width: 1880px; margin: 0 auto; }
+}
+
+.fastlab-news-content {
+  max-width: 1320px;
+  padding-top: 0;
+
+  .fastlab-breadcrumb { margin-right: 10px; margin-left: 10px; }
+  .fastlab-breadcrumb a { color: #27a6c5; }
+}
+
+.fastlab-news-item h3 { overflow-wrap: break-word; }
+
+.fastlab-news-pagination {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  margin: 26px 10px 0;
+  padding: 24px;
+  background: #f7f8f9;
+  color: #888;
+  font: 20px/1.5 $fastlab-serif;
+
+  a { display: inline-block; padding: 6px 8px; }
+  [aria-current="page"] { padding: 6px 8px; color: #444; font-weight: 700; }
+}
+
+.fastlab-news-page-numbers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.fastlab-news-newer, .fastlab-news-older {
+  font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  a { text-decoration: underline; text-underline-offset: 3px; }
+}
+.fastlab-news-older { text-align: right; }
+
+@media (max-width: 600px) {
+  .fastlab-news-pagination { grid-template-columns: 1fr 1fr; gap: 8px; padding: 14px; font-size: 18px; }
+  .fastlab-news-page-numbers { grid-column: 1 / -1; grid-row: 1; gap: 4px; }
+  .fastlab-news-newer, .fastlab-news-older { grid-row: 2; font-size: 14px; letter-spacing: 2px; }
+}

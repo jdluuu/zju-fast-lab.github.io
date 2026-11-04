@@ -1,0 +1,15 @@
+{{ define "main" }}
+<main id="main-content" class="fastlab-main fastlab-news-main">
+  <header class="fastlab-group-banner"><h1>News</h1></header>
+  <div class="fastlab-content fastlab-news-content">
+    <nav class="fastlab-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ site.Home.RelPermalink }}">Home</a><span aria-hidden="true">»</span><span aria-current="page">News</span>
+    </nav>
+    <section aria-label="News" id="news">
+      {{ $pager := .Paginate .RegularPages.ByDate.Reverse (site.Home.Params.news_count | default 10) }}
+      {{ range $pager.Pages }}{{ partial "fastlab-news-item.html" . }}{{ end }}
+      {{ partial "fastlab-news-pagination.html" (dict "pager" $pager "anchor" "#news") }}
+    </section>
+  </div>
+</main>
+{{ end }}

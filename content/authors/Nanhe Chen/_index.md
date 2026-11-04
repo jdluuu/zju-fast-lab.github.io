@@ -56,6 +56,8 @@ highlight_name: false
 
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
+advisor: Yanjun Cao
+
 user_groups:
   - Grad Students
 ---

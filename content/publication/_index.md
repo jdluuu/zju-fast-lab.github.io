@@ -1,5 +1,7 @@
 ---
 title: Publications
+design:
+  css_class: fastlab-publications
 
 # Listing view
 view: citation

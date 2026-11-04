@@ -1,0 +1,13 @@
+{{ $name := .Title }}
+{{ $id := printf "student-%s" (anchorize (path.Base .File.Dir)) }}
+<article class="fastlab-member-card" aria-labelledby="{{ $id }}" data-advisor="{{ .Params.advisor }}">
+  <a class="fastlab-member-photo" href="{{ .RelPermalink }}" aria-label="{{ $name }}">
+    {{ with .Resources.GetMatch "avatar.*" }}
+      {{ $portrait := .Fit "600x600 webp q90" }}
+      <img src="{{ $portrait.RelPermalink }}" alt="" width="{{ $portrait.Width }}" height="{{ $portrait.Height }}" loading="lazy" decoding="async">
+    {{ end }}
+  </a>
+  <div class="fastlab-member-text">
+    <h3 class="fastlab-member-name" id="{{ $id }}"><a href="{{ .RelPermalink }}">{{ partial "fastlab-person-name.html" .Title }}</a></h3>
+  </div>
+</article>

@@ -1,6 +1,14 @@
 ---
+layout: fastlab-faculty
+design:
+  css_class: fastlab-group
+avatar_source:
+  page: http://fit.zju.edu.cn/fitcn/2025/0401/c41985a3140585/page.htm
+  image: http://fit.zju.edu.cn/_upload/article/images/f6/0c/a7d6b4934b3eaad78e929b6b401b/40873d67-538c-4f62-8e8f-b8bfbc63a202.jpg
+  dimensions: 750x1050
 # Display name
 title: Shengze Cai 蔡声泽
+homepage: https://person.zju.edu.cn/0022084
 
 # Full Name (for SEO)
 first_name: Shengze
@@ -63,4 +71,4 @@ user_groups:
   - Members
 ---
 
-Dr. Cai received the B.Sc. and the Ph.D. degrees from Zhejiang University, Hangzhou, China, in 2014 and 2019, respectively. He is currently an ZJU100 tenure-track assistant professor with the Institute of Cyber-Systems \& Control, College of Control Science \& Engineering, Zhejiang University (ZJU). Prior to joining ZJU in 2022, he was a Post-Doctoral Research Associate with the Division of Applied Mathematics, Brown University, Providence, RI, USA. His research interests include scientific machine learning, control \& optimization as well as flow visualization techniques. In the past few years,  he is mainly dedicated to research in intelligent perception and modeling of complex fluid flows. He has published over 50 high-impact papers in prestigious journals such as Nature Machine Intelligence (cover paper), Nature Communications, and Proceedings of the National Academy of Sciences (PNAS), with a total citation count exceeding 7000, and has been listed among the world’s top 2% scientists since 2024. 
+Dr. Cai received the B.Sc. and the Ph.D. degrees from Zhejiang University, Hangzhou, China, in 2014 and 2019, respectively. He is currently an ZJU100 tenure-track assistant professor with the Institute of Cyber-Systems \& Control, College of Control Science \& Engineering, Zhejiang University (ZJU). Prior to joining ZJU in 2022, he was a Post-Doctoral Research Associate with the Division of Applied Mathematics, Brown University, Providence, RI, USA. His research interests include scientific machine learning, control \& optimization as well as flow visualization techniques. In the past few years,  he is mainly dedicated to research in intelligent perception and modeling of complex fluid flows. He has published over 50 high-impact papers in prestigious journals such as Nature Machine Intelligence (cover paper), Nature Communications, and Proceedings of the National Academy of Sciences (PNAS), with a total citation count exceeding 7000, and has been listed among the world’s top 2% scientists since 2024.

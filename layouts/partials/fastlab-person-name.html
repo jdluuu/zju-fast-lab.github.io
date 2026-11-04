@@ -1,0 +1,6 @@
+{{- $nativeName := findRE "[\\p{Han}]+$" . -}}
+{{- if $nativeName -}}
+  <span>{{ replaceRE "\\s*[\\p{Han}]+$" "" . }}</span> <span class="fastlab-name-native">{{ index $nativeName 0 }}</span>
+{{- else -}}
+  {{ . }}
+{{- end -}}

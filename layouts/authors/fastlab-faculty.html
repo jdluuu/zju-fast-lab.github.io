@@ -1,0 +1,13 @@
+{{ define "main" }}
+<main id="main-content" class="fastlab-group-main">
+  <div class="fastlab-group-banner"><div class="fastlab-group-banner-title">Research Group</div></div>
+  <div class="fastlab-group-content">
+    <nav class="fastlab-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ site.Home.RelPermalink }}">Home</a><span aria-hidden="true">»</span>
+      <a href="{{ "people/" | relLangURL }}">Research Group</a><span aria-hidden="true">»</span>
+      <span aria-current="page">{{ .Title }}</span>
+    </nav>
+    {{ partial "fastlab-faculty-profile.html" (dict "page" .) }}
+  </div>
+</main>
+{{ end }}

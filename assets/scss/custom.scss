@@ -1,0 +1,305 @@
+// Measurements and typography from the March 26, 2025 Customizr homepage.
+@font-face {
+  font-family: "Droid Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/droid-serif/droid-serif-regular.ttf") format("truetype");
+}
+
+$fastlab-serif: "Droid Serif", Georgia, "Times New Roman", serif;
+$fastlab-heading: Georgia, "Times New Roman", Times, serif;
+
+.page-header.header--fixed {
+  position: relative;
+  top: auto;
+}
+
+body.page-wrapper { padding-top: 0; }
+
+.fastlab-header {
+  position: relative;
+  z-index: 20;
+  background: #fff;
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 2px 2px rgba(102, 102, 102, .08);
+  color: #343434;
+}
+
+.fastlab-header-inner {
+  // Customizr's fluid header keeps a 96px inset even on wide screens.
+  width: 100%;
+  min-height: 98.633px;
+  padding: 0 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.fastlab-brand { display: block; flex: 0 0 auto; line-height: 0; }
+.fastlab-brand img { display: block; width: 250px; height: auto; }
+.fastlab-nav { display: flex; align-items: center; gap: 25px; }
+
+.fastlab-nav-link {
+  position: relative;
+  padding: 10px 0;
+  color: #313131;
+  font: 600 14.288px/1.55 $fastlab-serif;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  text-decoration: none;
+}
+
+.fastlab-nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  left: 0;
+  height: 3px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transition: transform .2s ease;
+}
+
+.fastlab-nav-link:hover::after,
+.fastlab-nav-link[aria-current="page"]::after { transform: scaleX(1); }
+.fastlab-nav-link[aria-current="page"] { color: #777; }
+
+.fastlab-header a:focus-visible,
+.fastlab-header button:focus-visible,
+.fastlab-main a:focus-visible,
+.fastlab-main button:focus-visible {
+  outline: 3px solid #21ade0;
+  outline-offset: 5px;
+}
+
+.fastlab-home, .fastlab-group, .fastlab-publications, .fastlab-news-page {
+  background: #fff;
+  color: #444;
+  font-family: $fastlab-serif;
+
+  .page-body { flex-grow: 0; }
+  h1, h2, h3 { font-family: $fastlab-heading; color: #303133; }
+  .page-footer { margin-top: 0; padding: 0; background: #222; }
+  .page-footer > .container { max-width: none; padding: 0; }
+}
+
+.fastlab-hero {
+  position: relative;
+  height: 514px;
+  overflow: hidden;
+  background: #d5e5e7;
+}
+
+.fastlab-slides, .fastlab-slide { position: absolute; inset: 0; }
+
+.fastlab-slide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .7s ease, visibility .7s ease;
+
+  &.is-active { opacity: 1; visibility: visible; }
+  img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+}
+
+.fastlab-carousel-controls[hidden] { display: none; }
+
+.fastlab-arrow, .fastlab-pause, .fastlab-dots button {
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  background: rgba(18, 63, 82, .5);
+}
+
+.fastlab-arrow {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 60px;
+  padding: 0;
+  transform: translateY(-50%);
+  font-size: 0;
+  transition: background .2s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: 22px;
+    width: 10px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 1px 1px 0;
+    transform: rotate(135deg);
+  }
+}
+
+.fastlab-prev { left: 0; }
+.fastlab-next { right: 0; }
+.fastlab-next::after { left: 18px; transform: rotate(-45deg); }
+.fastlab-arrow:hover, .fastlab-pause:hover { background: rgba(18, 63, 82, .8); }
+
+.fastlab-dots {
+  position: absolute;
+  right: 70px;
+  bottom: 3px;
+  left: 70px;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+
+  button { position: relative; width: 26px; height: 26px; padding: 0; background: transparent; }
+  button::after { content: ""; position: absolute; inset: 8px; background: rgba(255, 255, 255, .3); border-radius: 50%; }
+  button[aria-pressed="true"]::after { background: #fff; }
+}
+
+.fastlab-pause {
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 2px;
+  font: 16px/1 Arial, sans-serif;
+}
+
+.fastlab-content {
+  width: 70%;
+  margin: 0 auto;
+  padding: 30.08px 0 117.3px;
+
+  h1, h2 { margin: 0 10px 44.76px; font-size: 34.6px; font-weight: 600; line-height: 1.5; }
+  section + section { margin-top: 36.76px; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: rgba(102, 0, 0, .65); }
+  time { display: block; color: #767676; font: 13px/26.5px $fastlab-serif; letter-spacing: 1px; text-transform: uppercase; }
+}
+
+.fastlab-intro {
+  display: flow-root;
+  font-size: 18.048px;
+  line-height: 1.55;
+
+  h1 { margin: 20.76px 10px 43.32px; }
+  p { margin: 0 10px; font-size: inherit; }
+  p + p { margin-top: 22.56px; }
+  strong { font-weight: 700; }
+}
+
+.fastlab-project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  margin: 0 10px;
+}
+
+.fastlab-project {
+  min-width: 0;
+  margin-bottom: 10px;
+  border-left: 4px solid #f2c100;
+  background: #fff;
+}
+
+.fastlab-project, .fastlab-news-item {
+  box-shadow: 0 0 40px rgba(0, 0, 0, .05);
+  transition: transform .3s cubic-bezier(.25, .8, .25, 1), box-shadow .3s ease, background .3s ease;
+
+  &:hover, &:focus-within { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(0, 0, 0, .18), 0 10px 10px rgba(0, 0, 0, .15); }
+}
+
+.fastlab-project:hover { background: #f2f2f3; }
+
+.fastlab-project-image {
+  display: block;
+  aspect-ratio: 20 / 13;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: 0 5px 5px rgba(18, 63, 82, .035), 0 0 0 1px rgba(176, 181, 193, .2);
+
+  img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+.fastlab-project-text {
+  padding: 10px;
+  text-align: center;
+
+  h3 { margin: 0 0 10px; font: 400 24px/1.1 $fastlab-serif; overflow-wrap: break-word; }
+  h3 a { color: #121212; font-family: "Helvetica Neue", "Times New Roman", serif; }
+}
+
+.fastlab-content .fastlab-news { margin-top: 44.76px; }
+
+.fastlab-news-item {
+  margin: 0 10px 15px;
+  padding: 10px;
+  background: #fff;
+
+  h3 { margin: 0 0 10px; color: #121212; font: 400 24px/1.1 "Yrsa", "Times New Roman", serif; }
+}
+
+.fastlab-footer {
+  width: calc(100% - 64px);
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 25px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: #777;
+  font: 13.12px/1.6 $fastlab-serif;
+  letter-spacing: 1px;
+
+  a { color: inherit; }
+}
+
+@media (max-width: 1199px) {
+  .fastlab-hero { height: 396px; }
+}
+
+@media (max-width: 991px) {
+  .fastlab-hero { height: 308px; }
+  .fastlab-header-inner { padding-right: 32px; padding-left: 32px; }
+  .fastlab-brand img { width: 220px; }
+  .fastlab-nav { gap: 24px; }
+}
+
+@media (max-width: 767px) {
+  .fastlab-content { width: calc(100% - 64px); }
+  .fastlab-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+}
+
+@media (max-width: 600px) {
+  .fastlab-header-inner, .fastlab-content, .fastlab-footer { width: calc(100% - 36px); }
+  .fastlab-header-inner { min-height: 106px; margin: 0 auto; flex-direction: column; justify-content: center; gap: 10px; padding: 16px 0; }
+  .fastlab-brand img { width: 195px; }
+  .fastlab-nav { width: 100%; justify-content: center; gap: 26px; }
+  .fastlab-nav-link { font-size: 13px; padding: 8px 0; }
+  .fastlab-nav-link::after { bottom: 2px; }
+  .fastlab-hero { height: 220px; }
+  .fastlab-prev { left: 0; }
+  .fastlab-next { right: 0; }
+  .fastlab-content { padding-top: 30px; padding-bottom: 42px; }
+  .fastlab-content h1, .fastlab-content h2 { font-size: 28px; margin-bottom: 28px; }
+  .fastlab-content section + section { margin-top: 34px; }
+  .fastlab-intro { font-size: 17px; line-height: 1.55; }
+  .fastlab-project-text h3, .fastlab-news-item h3 { font-size: 22px; }
+}
+
+@media (max-width: 575px) {
+  .fastlab-project-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fastlab-slide, .fastlab-project, .fastlab-news-item, .fastlab-nav-link::after { transition: none; }
+  .fastlab-project:hover, .fastlab-project:focus-within, .fastlab-news-item:hover, .fastlab-news-item:focus-within { transform: none; }
+}
+
+@import "fastlab-group";
+@import "fastlab-publications";
+@import "fastlab-news";

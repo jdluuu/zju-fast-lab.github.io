@@ -1,0 +1,28 @@
+{{ $page := . }}
+{{ $pdf := .Params.url_pdf | default "" }}
+{{ if not $pdf }}
+  {{ with .Resources.GetMatch "*.pdf" }}{{ $pdf = .RelPermalink }}{{ end }}
+{{ end }}
+{{ with $pdf }}<a href="{{ . | relURL }}" target="_blank" rel="noopener">[pdf]</a>{{ end }}
+{{ with .Resources.GetMatch "cite.bib" }}
+  <a href="{{ .RelPermalink }}" class="js-cite-modal" data-filename="{{ .RelPermalink }}" aria-label="Cite {{ $page.Title }}">[cite]</a>
+{{ end }}
+{{ range slice "code" "dataset" "project" "poster" "slides" "video" "source" }}
+  {{ $label := . }}
+  {{ with index $page.Params (printf "url_%s" .) }}
+    {{/* Starter-template links do not point to research resources. */}}
+    {{ if not (in (slice "https://github.com/HugoBlox/hugo-blox-builder" "https://youtube.com") .) }}
+      {{ $url := . }}
+      {{ with $page.Resources.GetMatch . }}{{ $url = .RelPermalink }}{{ end }}
+      <a href="{{ $url | relURL }}" target="_blank" rel="noopener">[{{ $label }}]</a>
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ with .Params.doi }}
+  {{ $url := . }}
+  {{ if not (hasPrefix $url "https://") }}{{ $url = printf "https://doi.org/%s" . }}{{ end }}
+  <a href="{{ $url }}" target="_blank" rel="noopener">[doi]</a>
+{{ end }}
+{{ range .Params.links }}
+  {{ if and .name .url }}<a href="{{ .url | relURL }}" target="_blank" rel="noopener">[{{ .name }}]</a>{{ end }}
+{{ end }}

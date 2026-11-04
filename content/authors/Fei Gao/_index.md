@@ -1,6 +1,14 @@
 ---
+layout: fastlab-faculty
+design:
+  css_class: fastlab-group
+avatar_source:
+  page: https://fairplus.cn/speakers-srs/
+  image: http://fairplus.cn/wp-content/uploads/2026/01/1769500548-image.png
+  dimensions: 568x852
 # Display name
 title: Fei Gao 高飞
+homepage: https://feigao-robotics.com/
 
 # Full Name (for SEO)
 first_name: Fei

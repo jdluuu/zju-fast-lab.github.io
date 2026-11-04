@@ -1,6 +1,14 @@
 ---
+layout: fastlab-faculty
+design:
+  css_class: fastlab-group
+avatar_source:
+  page: https://libweb.zju.edu.cn/2026/0609/c53489a3176730/page.htm
+  image: https://libweb.zju.edu.cn/_upload/article/images/30/f1/82eb277b4298b8b6f69fb9b9fbc1/cf9b6604-9fa5-4859-bbcd-3ed7041240ab.png
+  dimensions: 800x1120
 # Display name
 title: Chao Xu 许超
+homepage: https://mypage.zju.edu.cn/xu
 
 # Full Name (for SEO)
 first_name: Chao

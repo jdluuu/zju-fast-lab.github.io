@@ -1,0 +1,18 @@
+{{ $page := . }}
+{{/* High-resolution wordmark from the lab's official e2e_opt project:
+  https://github.com/ZJU-FAST-Lab/e2e_opt/blob/main/static/images/logo_fastlab.png */}}
+{{ $logo := (resources.Get "media/logo.png").Resize "1100x" }}
+<header class="fastlab-header" id="navbar-main">
+  <div class="fastlab-header-inner">
+    <a class="fastlab-brand" href="{{ site.Home.RelPermalink }}" aria-label="FAST Lab home">
+      <img src="{{ $logo.RelPermalink }}" width="{{ $logo.Width }}" height="{{ $logo.Height }}" alt="FAST Lab" fetchpriority="high">
+    </a>
+    <nav class="fastlab-nav" aria-label="Main navigation">
+      {{ range site.Menus.main }}
+        {{ $active := cond (eq .URL "/") $page.IsHome (hasPrefix $page.RelPermalink (.URL | relLangURL)) }}
+        {{ if and (eq .URL "/people/") (eq $page.Section "authors") }}{{ $active = true }}{{ end }}
+        <a class="fastlab-nav-link" href="{{ .URL | relLangURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,115 @@
+{{ $faculty := .page }}
+{{ $inline := .inline | default false }}
+{{ $prefix := .prefix | default "" }}
+{{ $facultyName := path.Base $faculty.File.Dir }}
+{{ $members := (where (where site.Pages "Section" "authors") "Params.advisor" $facultyName).ByTitle }}
+{{/* Some existing publication records store several authors in one string. */}}
+{{ $publications := slice }}
+{{ range where site.RegularPages "Section" "publication" }}
+  {{ $publication := . }}
+  {{ $matches := false }}
+  {{ range .Params.authors }}
+    {{ range split (replace . ";" ",") "," }}
+      {{ if eq (lower (trim . " *\t\n")) (lower $facultyName) }}{{ $matches = true }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if $matches }}{{ $publications = $publications | append $publication }}{{ end }}
+{{ end }}
+{{ with $faculty }}
+<div class="fastlab-faculty-layout{{ if $inline }} fastlab-faculty-layout-inline{{ end }}">
+  {{ if not $inline }}
+  <aside class="fastlab-faculty-sidebar" aria-label="Research interests">
+    {{ with .Resources.GetMatch "avatar.*" }}
+      {{ $portrait := .Fit "600x720 webp q90" }}
+      <img class="fastlab-faculty-photo" src="{{ $portrait.RelPermalink }}" alt="{{ $faculty.Title }}" width="{{ $portrait.Width }}" height="{{ $portrait.Height }}" decoding="async">
+    {{ end }}
+    {{ with .Params.interests }}
+      <h2 class="fastlab-research-title">Research Areas</h2>
+      <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+    {{ end }}
+  </aside>
+  {{ end }}
+  <div class="fastlab-faculty-detail">
+    <div class="fastlab-faculty-overview">
+      <div class="fastlab-faculty-identity">
+        <p class="fastlab-faculty-label">Principal Investigator</p>
+        {{ if $inline }}<h2 class="fastlab-faculty-name">{{ .Title }}</h2>{{ else }}<h1 class="fastlab-faculty-name">{{ .Title }}</h1>{{ end }}
+        <p class="fastlab-faculty-role">{{ .Params.role }}</p>
+        {{ range .Params.organizations }}<p class="fastlab-affiliation">{{ .name }}</p>{{ end }}
+        <div class="fastlab-profile-links">
+          {{ range .Params.social }}
+            {{ if .link }}
+              {{ $label := .icon | humanize }}
+              {{ $href := .link }}
+              {{ if eq .icon "envelope" }}
+                {{ $label = "Email" }}
+                {{ if not (hasPrefix $href "mailto:") }}{{ $href = printf "mailto:%s" $href }}{{ end }}
+              {{ else if eq .icon "google-scholar" }}{{ $label = "Google Scholar" }}
+              {{ else if eq .icon "github" }}{{ $label = "GitHub" }}{{ end }}
+              <a href="{{ $href }}">{{ $label }}</a>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    {{ if $inline }}
+      {{ with .Params.interests }}
+        <aside class="fastlab-inline-research" aria-labelledby="{{ $prefix }}research-title">
+          <h3 id="{{ $prefix }}research-title">Research Areas</h3>
+          <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+        </aside>
+      {{ end }}
+    {{ end }}
+    </div>
+    <section class="fastlab-biography" aria-labelledby="{{ $prefix }}biography-title">
+      {{ if $inline }}<h3 class="fastlab-biography-title" id="{{ $prefix }}biography-title">Biography</h3>{{ else }}<h2 class="fastlab-biography-title" id="{{ $prefix }}biography-title">Biography</h2>{{ end }}
+      {{ .Content }}
+    </section>
+    {{ if or $members $publications }}
+      <div class="fastlab-faculty-sections" data-faculty-tabs>
+        <div class="fastlab-profile-tabs" aria-label="Profile sections" hidden>
+          {{ if $members }}<button id="{{ $prefix }}team-tab" type="button" aria-controls="{{ $prefix }}team-panel">Team</button>{{ end }}
+          {{ if $publications }}<button id="{{ $prefix }}publications-tab" type="button" aria-controls="{{ $prefix }}publications-panel">Publications</button>{{ end }}
+        </div>
+        {{ with $members }}
+          <section id="{{ $prefix }}team-panel" class="fastlab-profile-panel" aria-labelledby="{{ $prefix }}team-title">
+            {{ if $inline }}<h3 class="fastlab-section-title" id="{{ $prefix }}team-title">Students</h3>{{ else }}<h2 class="fastlab-section-title" id="{{ $prefix }}team-title">Students</h2>{{ end }}
+            <div class="fastlab-member-grid">
+              {{ range . }}
+                <article class="fastlab-member-card" data-advisor="{{ .Params.advisor }}">
+                  <a class="fastlab-member-photo" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+                    {{ with .Resources.GetMatch "avatar.*" }}
+                      {{ $portrait := .Fit "600x600 webp q90" }}
+                      <img src="{{ $portrait.RelPermalink }}" alt="" width="{{ $portrait.Width }}" height="{{ $portrait.Height }}" loading="lazy" decoding="async">
+                    {{ end }}
+                  </a>
+                  <div class="fastlab-member-text">
+                    {{ if $inline }}<h4 class="fastlab-member-name"><a href="{{ .RelPermalink }}">{{ partial "fastlab-person-name.html" .Title }}</a></h4>{{ else }}<h3 class="fastlab-member-name"><a href="{{ .RelPermalink }}">{{ partial "fastlab-person-name.html" .Title }}</a></h3>{{ end }}
+                    <p>{{ .Params.role }}</p>
+                  </div>
+                </article>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+        {{ with $publications }}
+          <section id="{{ $prefix }}publications-panel" class="fastlab-profile-panel" aria-labelledby="{{ $prefix }}publications-title">
+            {{ if $inline }}<h3 class="fastlab-section-title" id="{{ $prefix }}publications-title">Publications</h3>{{ else }}<h2 class="fastlab-section-title" id="{{ $prefix }}publications-title">Publications</h2>{{ end }}
+            {{ range (sort . "Date" "desc").GroupByDate "2006" }}
+              {{ if $inline }}<h4 class="fastlab-publication-year">{{ .Key }}</h4>{{ else }}<h3 class="fastlab-publication-year">{{ .Key }}</h3>{{ end }}
+              <ul class="fastlab-faculty-publications">
+                {{ range .Pages }}
+                  <li>
+                    <span class="fastlab-publication-authors">{{ delimit .Params.authors ", " }}.</span>
+                    <a class="fastlab-publication-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    {{ with .Params.publication }}<span class="fastlab-publication-venue">{{ . | markdownify }}</span>{{ end }}
+                  </li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </section>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

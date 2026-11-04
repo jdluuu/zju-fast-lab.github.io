@@ -1,0 +1,44 @@
+{{ define "main" }}
+<main id="main-content" class="fastlab-group-main">
+  <header class="fastlab-group-banner"><h1>Research Group</h1></header>
+  <div class="fastlab-group-content">
+    <nav class="fastlab-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ site.Home.RelPermalink }}">Home</a><span aria-hidden="true">»</span><span aria-current="page">Research Group</span>
+    </nav>
+    <section class="fastlab-faculty-section" aria-labelledby="faculty-title">
+    <h2 class="fastlab-directory-heading" id="faculty-title">Faculty</h2>
+    <div class="fastlab-faculty-grid" aria-label="Faculty members">
+      {{ range .Params.faculty }}
+        {{ with site.GetPage (printf "/authors/%s" .) }}
+          <div class="fastlab-faculty-card">
+            <a class="fastlab-faculty-link" href="{{ .Params.homepage | default .RelPermalink }}" aria-label="{{ .Title }}">
+              <span class="fastlab-faculty-portrait">
+                {{ with .Resources.GetMatch "avatar.*" }}
+                  {{ $portrait := .Fit "1200x1600 webp q92" }}
+                  <img src="{{ $portrait.RelPermalink }}" alt="" width="{{ $portrait.Width }}" height="{{ $portrait.Height }}" decoding="async">
+                {{ end }}
+              </span>
+            </a>
+            <h3>{{ partial "fastlab-person-name.html" .Title }}</h3>
+            <a class="fastlab-self-page" href="{{ .Params.homepage | default .RelPermalink }}" aria-label="{{ .Title }} self page">[self page]</a>
+            <p>{{ .Params.role }}</p>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    </section>
+    {{ $students := (where (where site.Pages "Section" "authors") "Params.user_groups" "intersect" (slice "Grad Students")).ByTitle }}
+    {{ range slice (dict "id" "phd-students" "title" "PhD Students" "role" "Ph.D. student") (dict "id" "master-students" "title" "Master Students" "role" "Master") }}
+      {{ $members := where $students "Params.role" .role }}
+      {{ if $members }}
+        <section class="fastlab-students-section" aria-labelledby="{{ .id }}">
+          <h2 class="fastlab-directory-heading" id="{{ .id }}">{{ .title }}</h2>
+          <div class="fastlab-students-grid">
+            {{ range $members }}{{ partial "fastlab-student-card.html" . }}{{ end }}
+          </div>
+        </section>
+      {{ end }}
+    {{ end }}
+  </div>
+</main>
+{{ end }}

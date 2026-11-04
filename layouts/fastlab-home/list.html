@@ -1,0 +1,62 @@
+{{ define "main" }}
+<main id="main-content" class="fastlab-main">
+  <section class="fastlab-hero" aria-label="Zhejiang University campus" aria-roledescription="carousel" data-fastlab-carousel>
+    <div class="fastlab-slides">
+      {{ range $index, $slide := .Params.hero }}
+        {{ $image := resources.Get (printf "media/%s" $slide.image) }}
+        <div class="fastlab-slide{{ if eq $index 0 }} is-active{{ end }}" role="group" aria-roledescription="slide" aria-label="{{ add $index 1 }} of {{ len $.Params.hero }}" aria-hidden="{{ if eq $index 0 }}false{{ else }}true{{ end }}">
+          <img src="{{ $image.RelPermalink }}" alt="{{ $slide.alt }}" width="{{ $image.Width }}" height="{{ $image.Height }}"{{ if eq $index 0 }} fetchpriority="high"{{ end }} decoding="async">
+        </div>
+      {{ end }}
+    </div>
+    <div class="fastlab-carousel-controls" hidden>
+      <button class="fastlab-arrow fastlab-prev" type="button" data-slide-step="-1" aria-label="Previous campus photograph">&#8249;</button>
+      <button class="fastlab-arrow fastlab-next" type="button" data-slide-step="1" aria-label="Next campus photograph">&#8250;</button>
+      <div class="fastlab-dots" aria-label="Choose campus photograph">
+        {{ range $index, $slide := .Params.hero }}
+          <button type="button" data-slide-index="{{ $index }}" aria-label="Show photograph {{ add $index 1 }}" aria-pressed="{{ if eq $index 0 }}true{{ else }}false{{ end }}"></button>
+        {{ end }}
+      </div>
+      <button class="fastlab-pause" type="button" data-carousel-pause aria-label="Pause slideshow"><span aria-hidden="true">Ⅱ</span></button>
+    </div>
+  </section>
+
+  <div class="fastlab-content">
+    <section class="fastlab-intro" aria-labelledby="our-lab">
+      <h1 id="our-lab">Our Lab</h1>
+      {{ .Content }}
+    </section>
+
+    <section class="fastlab-projects" aria-labelledby="recent-projects">
+      <h2 id="recent-projects">Recent Projects</h2>
+      <div class="fastlab-project-grid">
+        {{ range .Params.projects }}
+          {{ $project := . }}
+          {{ with site.GetPage .page }}
+            {{ $image := (resources.Get (printf "media/%s" $project.image)).Fit "760x480 webp q85" }}
+            <article class="fastlab-project">
+              <a class="fastlab-project-image" href="{{ .RelPermalink }}" aria-label="{{ $project.title }}">
+                <img src="{{ $image.RelPermalink }}" alt="" width="{{ $image.Width }}" height="{{ $image.Height }}" loading="lazy" decoding="async">
+              </a>
+              <div class="fastlab-project-text">
+                <h3><a href="{{ .RelPermalink }}">{{ $project.title }}</a></h3>
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+              </div>
+            </article>
+          {{ end }}
+        {{ end }}
+      </div>
+    </section>
+
+    <section class="fastlab-news" aria-labelledby="news">
+      <h2 id="news">News</h2>
+      {{ $news := (where site.RegularPages "Section" "post").ByDate.Reverse }}
+      {{ $pager := .Paginate $news (.Params.news_count | default 10) }}
+      {{ range $pager.Pages }}
+        {{ partial "fastlab-news-item.html" . }}
+      {{ end }}
+      {{ partial "fastlab-news-pagination.html" (dict "pager" $pager "anchor" "#news") }}
+    </section>
+  </div>
+</main>
+{{ end }}

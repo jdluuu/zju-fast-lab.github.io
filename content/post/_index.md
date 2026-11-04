@@ -1,5 +1,10 @@
 ---
-title: Latest News
+title: News
+design:
+  css_class: fastlab-news-page
+cascade:
+  design:
+    css_class: fastlab-news-page
 
 # Listing view
 view: compact

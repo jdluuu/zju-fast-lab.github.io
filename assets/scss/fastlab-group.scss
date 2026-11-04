@@ -1,0 +1,307 @@
+// Group pages follow the former Customizr title band and two-column profiles.
+.fastlab-group {
+  .page-body { flex-grow: 1; }
+  a { text-decoration: none; }
+
+  // Keep desktop spacing bounded when browser zoom increases the CSS viewport.
+  .fastlab-header-inner { max-width: 1880px; margin: 0 auto; }
+}
+
+.fastlab-group-main {
+  a { color: #27a6c5; }
+  a:hover { color: #9a314d; }
+  a:focus-visible, button:focus-visible { outline: 3px solid #21ade0; outline-offset: 4px; }
+}
+
+.fastlab-group-banner {
+  padding: 8px 10.7%;
+  background: #080e35;
+
+  h1, .fastlab-group-banner-title {
+    max-width: 1480px;
+    margin: 0 auto;
+    color: #fff;
+    font: 600 41.4px/1.5 $fastlab-heading;
+  }
+}
+
+.fastlab-group-content {
+  width: 70%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  font: 18.048px/1.65 $fastlab-serif;
+}
+
+.fastlab-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 5px;
+  padding-top: 30px;
+  margin-bottom: 64px;
+  color: #444;
+  font-size: 15.04px;
+  line-height: 1.65;
+}
+
+.fastlab-faculty-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px 20px;
+  padding: 0 10px;
+}
+
+.fastlab-faculty-card {
+  min-width: 0;
+  text-align: center;
+
+  h3 { margin: 28px 0 8px; font: 600 24px/1.5 $fastlab-heading; }
+  h3 a { color: #303133; }
+  h3 a:hover { color: #9a314d; }
+  p { margin: 0; color: #767676; font-size: 14px; }
+}
+
+.fastlab-name-native { display: block; }
+
+.fastlab-group-main .fastlab-faculty-link {
+  display: block;
+  color: #303133;
+}
+
+.fastlab-group-main .fastlab-self-page {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 4px 8px;
+  color: #284a9b;
+  font-size: 16px;
+  line-height: 1.5;
+
+  &:hover { color: #9a314d; text-decoration: underline; }
+}
+
+.fastlab-directory-heading {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0 0 36px;
+  color: #303133;
+  font: 600 32px/1.4 $fastlab-heading;
+
+  &::after { content: ""; flex: 1; height: 1px; background: #e2e6ee; }
+}
+
+.fastlab-faculty-section > .fastlab-directory-heading { margin-right: 10px; margin-left: 10px; }
+
+.fastlab-students-section {
+  margin: 64px 10px 0;
+}
+
+.fastlab-students-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 32px 24px;
+
+  .fastlab-member-card {
+    width: 100%;
+    max-width: 170px;
+    justify-self: center;
+    transition: transform .2s ease, box-shadow .2s ease;
+
+    &:focus-within { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(8, 14, 53, .12); }
+  }
+  .fastlab-member-text { padding: 10px 4px; }
+  .fastlab-member-text .fastlab-member-name {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+
+    a > span { display: block; white-space: nowrap; }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fastlab-students-grid .fastlab-member-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(8, 14, 53, .12);
+  }
+}
+
+.fastlab-faculty-portrait {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+
+  img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 0; }
+}
+
+.fastlab-faculty-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+  gap: 60px;
+  padding: 0 10px;
+}
+
+.fastlab-faculty-sidebar {
+  min-width: 0;
+
+  .fastlab-research-title { margin: 38px 0 24px; font: 600 32px/1.4 $fastlab-heading; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  li { margin-bottom: 20px; color: #173372; font: 600 18px/1.55 $fastlab-heading; }
+}
+
+.fastlab-faculty-photo { display: block; width: 100%; max-width: 280px; height: auto; border-radius: 0; }
+
+.fastlab-faculty-detail {
+  min-width: 0;
+
+  .fastlab-faculty-name { margin: 18px 0 10px; color: #121212; font: 600 42px/1.4 $fastlab-heading; }
+  .fastlab-faculty-label { margin: 0; color: #284a9b; font: 600 20px/1.5 Arial, sans-serif; text-transform: uppercase; }
+  .fastlab-faculty-role { margin: 0 0 5px; font-size: 20px; }
+  .fastlab-affiliation { margin: 0; color: #666; font-size: 16px; }
+}
+
+.fastlab-profile-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 22px 0 28px; font: 600 16px/1.5 $fastlab-heading; }
+
+.fastlab-biography {
+  .fastlab-biography-title { margin: 0 0 10px; color: #777; font: 400 16px/1.5 $fastlab-serif; letter-spacing: 1px; text-transform: uppercase; }
+  p { margin: 0 0 20px; font-size: inherit; overflow-wrap: break-word; }
+}
+
+.fastlab-faculty-layout-inline {
+  display: block;
+
+  .fastlab-faculty-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 32px 48px;
+    margin-bottom: 36px;
+  }
+  .fastlab-profile-links { margin-bottom: 0; }
+  .fastlab-biography { max-width: 90ch; }
+}
+
+.fastlab-inline-research {
+  padding-left: 32px;
+  border-left: 1px solid #e5e7ec;
+
+  h3 { margin: 0 0 18px; color: #777; font: 400 16px/1.5 $fastlab-serif; letter-spacing: 1px; text-transform: uppercase; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  li { margin-bottom: 12px; color: #173372; font: 600 18px/1.55 $fastlab-heading; }
+  li:last-child { margin-bottom: 0; }
+}
+
+.fastlab-faculty-sections { margin-top: 32px; }
+.fastlab-profile-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 28px;
+
+  &[hidden] { display: none; }
+  button { padding: 13px 20px; border: 1px solid #eee; background: #fff; color: #292740; cursor: pointer; font: 600 20px/1.4 $fastlab-heading; }
+  button[aria-selected="true"] { color: #9a314d; border-top: 3px solid #9a314d; padding-top: 11px; }
+}
+
+.fastlab-profile-panel {
+  &[hidden] { display: none; }
+  > .fastlab-section-title { margin: 0 0 24px; font: 600 26px/1.4 $fastlab-heading; }
+  + .fastlab-profile-panel { margin-top: 32px; }
+}
+
+.fastlab-member-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 15px; }
+.fastlab-member-card { min-width: 0; border-left: 4px solid #f2c100; background: #fff; box-shadow: 0 0 40px rgba(0, 0, 0, .05); }
+.fastlab-member-photo {
+  display: block;
+  aspect-ratio: 1;
+
+  img { display: block; width: 100%; height: 100%; border-radius: 0; object-fit: cover; object-position: center top; }
+}
+
+.fastlab-member-text {
+  padding: 12px 8px;
+  text-align: center;
+
+  .fastlab-member-name { margin: 0 0 8px; font: 600 17.28px/1.5 $fastlab-heading; overflow-wrap: break-word; }
+  .fastlab-member-name a { color: #3a3a3a; }
+  .fastlab-member-name a:hover { color: #9a314d; }
+  p { margin: 0; color: #767676; font-size: 13px; line-height: 1.5; }
+}
+
+.fastlab-faculty-detail .fastlab-publication-year { margin: 24px 0 18px; padding-top: 14px; border-top: 1px solid #eee; font: 600 20px/1.5 $fastlab-heading; }
+.fastlab-faculty-publications {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+
+  li { margin-bottom: 16px; padding: 8px 12px; border-left: 4px solid #f2c100; }
+  .fastlab-publication-title { color: #303133; font-weight: 700; font-style: italic; }
+  .fastlab-publication-title:hover { color: #9a314d; }
+  .fastlab-publication-venue { font-style: italic; }
+}
+
+@media (max-width: 1399px) {
+  .fastlab-students-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1199px) {
+  .fastlab-group-content { width: 80%; }
+  .fastlab-faculty-layout { gap: 32px; }
+  .fastlab-faculty-detail .fastlab-faculty-name { font-size: 36px; }
+  .fastlab-member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 959px) {
+  .fastlab-students-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767px) {
+  .fastlab-group-banner { padding: 12px 32px; }
+  .fastlab-group-banner h1, .fastlab-group-banner .fastlab-group-banner-title { font-size: 32px; }
+  .fastlab-group-content { width: calc(100% - 64px); font-size: 17px; padding-bottom: 64px; }
+  .fastlab-breadcrumb { margin-bottom: 40px; }
+  .fastlab-faculty-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; }
+  .fastlab-students-section { margin: 48px 0 0; }
+  .fastlab-directory-heading { font-size: 28px; gap: 16px; margin-bottom: 28px; }
+  .fastlab-faculty-section > .fastlab-directory-heading { margin-right: 0; margin-left: 0; }
+  .fastlab-students-grid { gap: 28px 24px; }
+  .fastlab-faculty-layout { grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .fastlab-faculty-sidebar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 0 24px; }
+  .fastlab-faculty-sidebar .fastlab-faculty-photo { grid-row: span 2; }
+  .fastlab-faculty-sidebar .fastlab-research-title { margin: 0 0 16px; font-size: 26px; }
+  .fastlab-faculty-sidebar li { font-size: 16px; margin-bottom: 12px; }
+  .fastlab-faculty-layout-inline .fastlab-faculty-overview { grid-template-columns: minmax(0, 1fr); }
+  .fastlab-inline-research { padding: 24px 0 0; border-left: 0; border-top: 1px solid #e5e7ec; }
+}
+
+@media (max-width: 639px) {
+  .fastlab-students-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 480px) {
+  .fastlab-group-banner { padding-right: 28px; padding-left: 28px; }
+  .fastlab-group-content { width: calc(100% - 56px); }
+  .fastlab-faculty-card h3 { font-size: 21px; margin-top: 16px; }
+  .fastlab-faculty-card p { font-size: 13px; }
+  .fastlab-faculty-sidebar { display: block; }
+  .fastlab-faculty-sidebar .fastlab-faculty-photo { width: 200px; margin: 0 auto 28px; }
+  .fastlab-faculty-detail .fastlab-faculty-name { font-size: 32px; }
+  .fastlab-profile-tabs button { font-size: 18px; padding-right: 16px; padding-left: 16px; }
+  .fastlab-member-grid { gap: 18px 12px; }
+  .fastlab-member-text .fastlab-member-name { font-size: 16px; }
+}
+
+@media (max-width: 359px) {
+  .fastlab-students-grid .fastlab-member-text { padding-right: 2px; padding-left: 2px; }
+  .fastlab-students-grid .fastlab-member-text .fastlab-member-name { font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fastlab-students-grid .fastlab-member-card {
+    transition: none;
+    &:hover, &:focus-within { transform: none; }
+  }
+}
+

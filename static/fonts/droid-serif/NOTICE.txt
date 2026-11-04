@@ -1,0 +1,6 @@
+Droid Serif Regular
+Digitized data copyright © 2007, Google Corporation.
+Licensed under the Apache License, Version 2.0 (see LICENSE.txt).
+
+Source: https://fonts.gstatic.com/s/droidserif/v20/tDbI2oqRg1oM3QBjjcaDkOr9rAA.ttf
+Used by the archived FAST Lab homepage; hosted locally for consistent rendering.

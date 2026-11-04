@@ -1,0 +1,21 @@
+{{ $pager := .pager }}
+{{ $anchor := .anchor | default "" }}
+{{ if gt $pager.TotalPages 1 }}
+<nav class="fastlab-news-pagination" aria-label="News pagination">
+  <div class="fastlab-news-newer">
+    {{ with $pager.Prev }}<a href="{{ .URL }}{{ $anchor }}" rel="prev">Newer</a>{{ end }}
+  </div>
+  <div class="fastlab-news-page-numbers">
+    {{ range $pager.Pagers }}
+      {{ if eq .PageNumber $pager.PageNumber }}
+        <span aria-current="page" aria-label="Page {{ .PageNumber }}">{{ .PageNumber }}</span>
+      {{ else }}
+        <a href="{{ .URL }}{{ $anchor }}" aria-label="Page {{ .PageNumber }}">{{ .PageNumber }}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+  <div class="fastlab-news-older">
+    {{ with $pager.Next }}<a href="{{ .URL }}{{ $anchor }}" rel="next">Older</a>{{ end }}
+  </div>
+</nav>
+{{ end }}

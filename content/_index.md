@@ -1,68 +1,38 @@
 ---
-# Leave the homepage title empty to use the site title
 title:
 date: 2022-10-24
-type: landing
-view: compact
+type: fastlab-home
+design:
+  css_class: fastlab-home
 
-sections:
-  - block:
-    content:
-      title:
-      text: 
-        <br>
-       Welcome to the **Field Autonomous System and Computing Lab (FAST Lab)** of Zhejiang University. Our mission is to create fully intelligent robot teams that are capable of operating in complex and diverse environments to tackle real-world challenges. We are fascinated by novel robotic concepts and excited about pushing the boundaries of robotics' potential to demonstrate remarkable capabilities. More specifically, our research interests cover multi-robot cooperation, novel robot platforms, and autonomous navigation.
-      design:
-        view: card
-        columns: '1'
+# Original homepage photographs, retrieved from the March 26, 2025 archive:
+# https://web.archive.org/web/20250326071840/https://zju-fast.com/
+hero:
+  - image: home/zju-library.jpg
+    alt: Zhejiang University library and campus at dusk
+  - image: home/zju-campus.jpg
+    alt: Zhejiang University campus with green hills in the background
 
-        
-  - block: collection
-    content:
-      title: Latest News
-      subtitle:
-      text:
-      count: 5
-      filters:
-        author: ''
-        category: ''
-        exclude_featured: false
-        publication_type: ''
-        tag: ''
-      offset: 0
-      order: desc
-      page_type: post
-    design:
-      view: card
-      columns: '2'
-
-  - block: markdown
-    content:
-      title:
-      subtitle: ''
-      text:
-    design:
-      columns: '1'
-      background:
-        image: 
-          filename: coders.jpg
-          filters:
-            brightness: 1
-          parallax: false
-          position: center
-          size: cover
-          text_color_light: true
-      spacing:
-        padding: ['20px', '0', '20px', '0']
-      css_class: fullscreen
-
-
-  - block: markdown
-    content:
-      title:
-      subtitle:
-      text: |
-        {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
-    design:
-      columns: '1'
+# Keep the homepage selections editable without changing the layout.
+projects:
+  - page: /publication/conference-paper/crepes
+    title: 'CREPES: Cooperative Relative Pose Estimation'
+    image: crepes.jpg
+  - page: /publication/journal-article/zbz_coni
+    title: 'CoNi-MPC: Cooperative Aerial Control'
+    image: coni-mpc.jpg
+  - page: /publication/conference-paper/trofly
+    title: 'TrofyBot: A Transformable Rolling and Flying Robot'
+    image: trofybot.jpg
+  - page: /publication/journal-article/zmk-tase
+    title: 'DDR-Planner: Universal Trajectory Optimization'
+    image: ddr-planner.jpg
+news_count: 10
 ---
+
+Welcome to the website of FAST (**F**ield **A**utonomous **S**ystem & compu**T**ing) Lab led by Prof. Chao Xu and Prof. Fei Gao. Our Lab is part of the Institute of Cyber-Systems and Control (CSC) at Zhejiang University.
+
+Our group is mainly engaged in the following fields:<br>
+• Autonomous Systems (navigation, control, motion planning, perception, SLAM, etc.);<br>
+• Scientific Machine Learning (applied in modeling turbulent flows, etc.);<br>
+• Applied Dynamics & Control Systems.

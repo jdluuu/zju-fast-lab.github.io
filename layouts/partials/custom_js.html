@@ -1,0 +1,12 @@
+{{ if .IsHome }}
+  {{ $script := resources.Get "js/fastlab-home.js" | minify | fingerprint }}
+  <script src="{{ $script.RelPermalink }}" defer></script>
+{{ end }}
+{{ if eq .Layout "fastlab-faculty" }}
+  {{ $script := resources.Get "js/fastlab-group.js" | minify | fingerprint }}
+  <script src="{{ $script.RelPermalink }}" defer></script>
+{{ end }}
+{{ if and .IsSection (eq .Section "publication") }}
+  {{ $script := resources.Get "js/fastlab-publications.js" | minify | fingerprint }}
+  <script src="{{ $script.RelPermalink }}" defer></script>
+{{ end }}

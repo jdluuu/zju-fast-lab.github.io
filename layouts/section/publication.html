@@ -1,0 +1,77 @@
+{{ define "main" }}
+{{ $publications := .RegularPagesRecursive.ByDate.Reverse }}
+{{ $years := slice }}
+{{ $types := slice }}
+{{ range $publications }}
+  {{ $years = $years | append (.Date.Format "2006") }}
+  {{ range .Params.publication_types }}{{ $types = $types | append . }}{{ end }}
+{{ end }}
+<main id="main-content" class="fastlab-publications-main" data-publications>
+  <header class="fastlab-publications-heading">
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{ with .Content }}<div class="fastlab-publications-intro">{{ . }}</div>{{ end }}
+  <form class="fastlab-publication-filters" role="search" aria-label="Filter publications" hidden>
+    <div class="fastlab-publication-search">
+      <label class="sr-only" for="publication-search">Search publications</label>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+      <input id="publication-search" type="search" placeholder="Search..." autocomplete="off" aria-controls="publication-results">
+    </div>
+    <label class="sr-only" for="publication-faculty">Faculty member</label>
+    <select id="publication-faculty" aria-controls="publication-results">
+      <option value="">All faculty</option>
+      {{ with site.GetPage "/people" }}
+        {{ range .Params.faculty }}
+          {{ $name := . }}
+          {{ with site.GetPage (printf "/authors/%s" .) }}<option value="{{ lower $name }}">{{ .Title }}</option>{{ end }}
+        {{ end }}
+      {{ end }}
+    </select>
+    <label class="sr-only" for="publication-type">Publication type</label>
+    <select id="publication-type" aria-controls="publication-results">
+      <option value="">Type</option>
+      {{ range sort (uniq $types) }}
+        <option value="{{ . }}">{{ i18n (printf "pub_%s" (replace . "-" "_")) | default (humanize .) }}</option>
+      {{ end }}
+    </select>
+    <label class="sr-only" for="publication-year">Publication year</label>
+    <select id="publication-year" aria-controls="publication-results">
+      <option value="">Year</option>
+      {{ range sort (uniq $years) "value" "desc" }}<option value="{{ . }}">{{ . }}</option>{{ end }}
+    </select>
+  </form>
+  <p class="sr-only" role="status" aria-live="polite" aria-atomic="true" data-publication-status>{{ len $publications }} publications</p>
+  <div id="publication-results" class="fastlab-publication-list">
+    {{ range $publications }}
+      {{ $paper := . }}
+      {{ $authors := slice }}
+      {{ range .Params.authors }}
+        {{ range split (replace . ";" ",") "," }}
+          {{ with trim . " \t\n" }}{{ $authors = $authors | append . }}{{ end }}
+        {{ end }}
+      {{ end }}
+      <article class="fastlab-paper" data-authors="{{ delimit $authors "|" }}" data-year="{{ .Date.Format "2006" }}" data-types="{{ delimit .Params.publication_types " " }}" data-search="{{ printf "%s %s %s %s" .Title (delimit $authors " ") (.Params.publication | default "" | plainify) (.Date.Format "2006") }}">
+        <p>
+          <a class="fastlab-paper-title" href="{{ .RelPermalink }}">{{ trim .Title " .\t\n" }}.</a>
+          <span class="fastlab-paper-authors">
+            {{- range $index, $author := $authors -}}
+              {{- if $index }}, {{ end -}}
+              {{- $author -}}
+              {{- with index ($paper.Params.author_notes | default slice) $index -}}
+                <sup class="fastlab-author-note" title="{{ . }}" aria-label="{{ . }}">*</sup>
+              {{- end -}}
+            {{- end -}}
+          </span>
+          <span class="fastlab-paper-year">({{ .Date.Format "2006" }}).</span>
+          {{ with .Params.publication }}<span class="fastlab-paper-venue">{{ trim (. | plainify) " .\t\n" }}.</span>{{ end }}
+          <span class="fastlab-paper-links">{{ partial "fastlab-publication-links.html" . }}</span>
+        </p>
+      </article>
+    {{ end }}
+  </div>
+  <div class="fastlab-publication-empty" data-publication-empty hidden>
+    <p>No publications match your search.</p>
+    <button type="button" data-publication-reset>Clear filters</button>
+  </div>
+</main>
+{{ end }}

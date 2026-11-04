@@ -1,6 +1,10 @@
 ---
+layout: fastlab-faculty
+design:
+  css_class: fastlab-group
 # Display name
 title: Yanjun Cao 曹燕军
+homepage: https://fast-fire.github.io/author/yanjun-cao/
 
 # Full Name (for SEO)
 first_name: Yanjun
