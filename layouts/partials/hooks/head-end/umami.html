@@ -1,0 +1,7 @@
+{{/* Share the personal site's Umami property only on this fork's Pages preview. */}}
+{{ if eq site.BaseURL "https://jdluuu.github.io/zju-fast-lab.github.io/" }}
+  <script defer src="https://cloud.umami.is/script.js"
+    data-website-id="52c65caa-4671-4b66-a3fa-6ecd7c22b868"
+    data-domains="jdluuu.github.io"
+    data-tag="fastlab-preview"></script>
+{{ end }}
