@@ -4,9 +4,9 @@ env:
   WC_HUGO_VERSION: '0.135.0'
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
+  # Publish main, and preview new on forks.
   push:
-    branches: ["main"]
+    branches: ["main", "new"]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
@@ -23,7 +23,7 @@ concurrency:
 jobs:
   # Build website
   build:
-    if: github.repository_owner != 'HugoBlox'
+    if: github.repository_owner != 'HugoBlox' && (github.ref_name == 'main' || github.event_name == 'workflow_dispatch' || github.event.repository.fork)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -58,7 +58,7 @@ jobs:
 
   # Deploy website to GitHub Pages hosting
   deploy:
-    if: github.repository_owner != 'HugoBlox'
+    if: github.repository_owner != 'HugoBlox' && (github.ref_name == 'main' || github.event_name == 'workflow_dispatch' || github.event.repository.fork)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
